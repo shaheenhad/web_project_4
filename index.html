@@ -23,7 +23,7 @@
     <header class="header">
       <img class="logo" src="./images/around_logo.svg" />
     </header>
-    <main class="content">
+    <main>
       <section class="profile">
         <img class="profile__image" src="./images/profile.jpg" />
         <div class="profile__info">
@@ -33,8 +33,108 @@
         </div>
         <button class="profile__add-button"></button>
       </section>
+      <section class="elements">
+        <article class="card">
+          <img
+            class="card__image"
+            src="./images/nyc.jpg"
+            alt="view of central park and surrounding area, manhattan"
+          />
+          <div class="card__info">
+            <p class="card__title">Central Park</p>
+            <button class="card__like">
+              <img class="card__like-image" src="./images/heart_disabled.svg" />
+            </button>
+          </div>
+        </article>
+        <article class="card">
+          <img
+            class="card__image"
+            src="./images/pcb.jpg"
+            alt="view of panama city beach"
+          />
+          <div class="card__info">
+            <p class="card__title">Panama City Beach</p>
+            <button class="card__like">
+              <img class="card__like-image" src="./images/heart_disabled.svg" />
+            </button>
+          </div>
+        </article>
+        <article class="card">
+          <img
+            class="card__image"
+            src="./images/dc.jpg"
+            alt="japaneses cherry trees in Washington, DC"
+          />
+          <div class="card__info">
+            <p class="card__title">Washington, DC</p>
+            <button class="card__like">
+              <img class="card__like-image" src="./images/heart_disabled.svg" />
+            </button>
+          </div>
+        </article>
+        <article class="card">
+          <img
+            class="card__image"
+            src="./images/keystone.jpg"
+            alt="snowy mountain range, keystone"
+          />
+          <div class="card__info">
+            <p class="card__title">Keystone</p>
+            <button class="card__like">
+              <img class="card__like-image" src="./images/heart_disabled.svg" />
+            </button>
+          </div>
+        </article>
+        <article class="card">
+          <img
+            class="card__image"
+            src="./images/buffalo_river.jpg"
+            alt="canoe on river bank in front of rock formation"
+          />
+          <div class="card__info">
+            <p class="card__title">Buffalo River</p>
+            <button class="card__like">
+              <img class="card__like-image" src="./images/heart_disabled.svg" />
+            </button>
+          </div>
+        </article>
+        <article class="card">
+          <img
+            class="card__image"
+            src="./images/new_orleans.jpg"
+            alt="palm trees and garden in front of large white building"
+          />
+          <div class="card__info">
+            <p class="card__title">New Orleans</p>
+            <button class="card__like">
+              <img class="card__like-image" src="./images/heart_disabled.svg" />
+            </button>
+          </div>
+        </article>
+      </section>
     </main>
-    <footer class="footer"></footer>
-    <div class="popup"></div>
+    <footer class="footer">
+      <p class="footer__text">© 2021 Around The U.S.</p>
+    </footer>
+    <div class="popup">
+      <form class="popup__form">
+        <p class="popup_title">Edit profile</p>
+        <fieldset class="popup__form-fieldset">
+          <input
+            class="form__input"
+            type="text"
+            placeholder="Name Surname"
+            name="name"
+          />
+          <input
+            class="form__input"
+            type="text"
+            placeholder="Title"
+            name="itle"
+          />
+        </fieldset>
+      </form>
+    </div>
   </div>
 </body>

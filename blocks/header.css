@@ -2,4 +2,11 @@
   margin: 45px 0 40px;
   padding-bottom: 40px;
   border-bottom: 1px solid #545454;
+  width: 100%;
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    margin: 28px 0 38.25px;
+  }
 }

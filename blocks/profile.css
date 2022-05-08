@@ -38,6 +38,9 @@
   margin: 0;
   font-size: 18px;
   line-height: 1.21;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__edit-button {
@@ -76,4 +79,23 @@
 
 .profile__add-button:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 320px) {
+  .profile {
+    flex-direction: column;
+  }
+
+  .profile__image {
+    margin: auto;
+  }
+
+  .profile__info {
+    gap: 10px 14px;
+  }
+
+  .profile__name {
+    font-size: 22px;
+    line-height: 1.21;
+  }
 }
