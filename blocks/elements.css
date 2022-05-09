@@ -6,8 +6,18 @@
   padding-top: 50px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 925px) {
+  .elements {
+    grid-template-columns: 1fr 1fr;
+    padding-top: 36px;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
   .elements {
     grid-template-columns: 1fr;
+    padding-top: 36px;
+    max-width: 880px;
   }
 }

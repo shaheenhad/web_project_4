@@ -10,3 +10,10 @@
   line-height: 1.22px;
   min-width: 282px;
 }
+
+@media screen and (max-width: 320px) {
+  .footer {
+    margin: 50px auto 0;
+    width: 288px;
+  }
+}
