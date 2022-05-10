@@ -4,8 +4,8 @@ const popup = page.querySelector(".popup");
 const closeButton = page.querySelector(".popup__close");
 const profileName = page.querySelector(".profile__name");
 const profileTitle = page.querySelector(".profile__description");
-const popupName = page.querySelector(".popup__input_name");
-const popupTitle = page.querySelector(".popup__input_title");
+const popupName = page.querySelector(".popup__input_type_name");
+const popupTitle = page.querySelector(".popup__input_type_title");
 const popupForm = page.querySelector(".popup__form");
 
 // make popup visible when edit button is clicked

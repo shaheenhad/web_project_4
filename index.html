@@ -16,118 +16,128 @@
     />
     <link rel="stylesheet" href="./pages/index.css" />
   </head>
-</html>
 
-<body class="page">
-  <div class="page__content">
-    <header class="header">
-      <img class="logo" src="./images/around_logo.svg" />
-    </header>
-    <main>
-      <section class="profile">
-        <img class="profile__image" src="./images/profile.jpg" />
-        <div class="profile__info">
-          <p class="profile__name">Jacques Cousteau</p>
-          <p class="profile__description">Explorer</p>
-          <button class="profile__edit-button"></button>
+  <body class="page">
+    <div class="page__content">
+      <header class="header">
+        <img
+          class="logo"
+          src="./images/around_logo.svg"
+          alt="around the us logo"
+        />
+      </header>
+      <main>
+        <section class="profile">
+          <img
+            class="profile__image"
+            src="./images/profile.jpg"
+            alt="image of older man in blue shirt and red hat, in front of water"
+          />
+          <div class="profile__info">
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <p class="profile__description">Explorer</p>
+            <button type="button" class="profile__edit-button"></button>
+          </div>
+          <button type="button" class="profile__add-button"></button>
+        </section>
+        <section class="elements">
+          <article class="card">
+            <img
+              class="card__image"
+              src="./images/nyc.jpg"
+              alt="view of central park and surrounding area, manhattan"
+            />
+            <div class="card__info">
+              <h2 class="card__title">Central Park</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+          <article class="card">
+            <img
+              class="card__image"
+              src="./images/pcb.jpg"
+              alt="view of panama city beach"
+            />
+            <div class="card__info">
+              <h2 class="card__title">Panama City Beach</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+          <article class="card">
+            <img
+              class="card__image"
+              src="./images/dc.jpg"
+              alt="japaneses cherry trees in Washington, DC"
+            />
+            <div class="card__info">
+              <h2 class="card__title">Washington, DC</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+          <article class="card">
+            <img
+              class="card__image"
+              src="./images/keystone.jpg"
+              alt="snowy mountain range, keystone"
+            />
+            <div class="card__info">
+              <h2 class="card__title">Keystone</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+          <article class="card">
+            <img
+              class="card__image"
+              src="./images/buffalo_river.jpg"
+              alt="canoe on river bank in front of rock formation"
+            />
+            <div class="card__info">
+              <h2 class="card__title">Buffalo River</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+          <article class="card">
+            <img
+              class="card__image"
+              src="./images/new_orleans.jpg"
+              alt="palm trees and garden in front of large white building"
+            />
+            <div class="card__info">
+              <h2 class="card__title">New Orleans</h2>
+              <button type="button" class="card__like"></button>
+            </div>
+          </article>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__text">© 2021 Around The U.S.</p>
+      </footer>
+      <div class="popup">
+        <div class="popup__container">
+          <button type="button" class="popup__close"></button>
+          <form name="popup-form" class="popup__form">
+            <h2 class="popup__title">Edit profile</h2>
+            <fieldset class="popup__form-fieldset">
+              <input
+                class="popup__input popup__input_type_name"
+                type="text"
+                placeholder="Name Surname"
+                name="name"
+                required
+              />
+              <input
+                class="popup__input popup__input_type_title"
+                type="text"
+                placeholder="Title"
+                name="title"
+                required
+              />
+              <button type="submit" class="popup__submit-button">Save</button>
+            </fieldset>
+          </form>
         </div>
-        <button class="profile__add-button"></button>
-      </section>
-      <section class="elements">
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/nyc.jpg"
-            alt="view of central park and surrounding area, manhattan"
-          />
-          <div class="card__info">
-            <p class="card__title">Central Park</p>
-            <button class="card__like"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/pcb.jpg"
-            alt="view of panama city beach"
-          />
-          <div class="card__info">
-            <p class="card__title">Panama City Beach</p>
-            <button class="card__like"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/dc.jpg"
-            alt="japaneses cherry trees in Washington, DC"
-          />
-          <div class="card__info">
-            <p class="card__title">Washington, DC</p>
-            <button class="card__like"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/keystone.jpg"
-            alt="snowy mountain range, keystone"
-          />
-          <div class="card__info">
-            <p class="card__title">Keystone</p>
-            <button class="card__like"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/buffalo_river.jpg"
-            alt="canoe on river bank in front of rock formation"
-          />
-          <div class="card__info">
-            <p class="card__title">Buffalo River</p>
-            <button class="card__like"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img
-            class="card__image"
-            src="./images/new_orleans.jpg"
-            alt="palm trees and garden in front of large white building"
-          />
-          <div class="card__info">
-            <p class="card__title">New Orleans</p>
-            <button class="card__like"></button>
-          </div>
-        </article>
-      </section>
-    </main>
-    <footer class="footer">
-      <p class="footer__text">© 2021 Around The U.S.</p>
-    </footer>
-    <div class="popup">
-      <div class="popup__container">
-        <button type="button" class="popup__close"></button>
-        <form class="popup__form">
-          <p class="popup_title">Edit profile</p>
-          <fieldset class="popup__form-fieldset">
-            <input
-              class="popup__input popup__input_name"
-              type="text"
-              placeholder="Name Surname"
-              name="name"
-            />
-            <input
-              class="popup__input popup__input_title"
-              type="text"
-              placeholder="Title"
-              name="title"
-            />
-            <button type="submit" class="popup__submit-button">Save</button>
-          </fieldset>
-        </form>
       </div>
     </div>
-  </div>
-  <script src="./scripts/index.js"></script>
-</body>
+    <script src="./scripts/index.js"></script>
+  </body>
+</html>

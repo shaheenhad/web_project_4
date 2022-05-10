@@ -1,23 +1,22 @@
 .card {
   width: 282px;
-  height: 361px;
   background-color: #fff;
   border-radius: 10px;
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  row-gap: 25px;
   margin: auto;
 }
 
 .card__image {
   width: 100%;
   height: 282px;
+  object-fit: none;
 }
+
 .card__info {
   display: flex;
-  width: 246px;
-  margin-left: 21px;
+  padding: 25px 15px 31px 21px;
   justify-content: space-between;
   align-items: center;
 }
@@ -36,7 +35,6 @@
 .card__like {
   width: 21px;
   height: 19px;
-
   cursor: pointer;
   background-image: url("../images/heart_disabled.svg");
   background-repeat: no-repeat;

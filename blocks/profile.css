@@ -26,6 +26,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  text-align: center;
   font-size: 42px;
   line-height: 1.14;
   margin: 0;
@@ -73,12 +74,23 @@
   background-color: transparent;
   background-repeat: no-repeat;
   border: solid 2px #fff;
+  border-radius: 2px;
   cursor: pointer;
   transition: opacity 0.1s linear;
 }
 
 .profile__add-button:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 900px) {
+  .profile {
+    max-width: 90%;
+    margin: auto;
+  }
+  .profile__add-button {
+    margin-left: 10px;
+  }
 }
 
 @media screen and (max-width: 500px) {
