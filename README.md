@@ -1,16 +1,9 @@
-# Project 4: Around The U.S.
+# Project 4: Around the U.S.
 
-### Overview
+**Intro**
 
-* Figma
-* Images
+This is a project that allows the user to view some images of places around the United States. Users can also edit their profile name and title/description.
 
-**Figma**
+**Description**
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
-
-**Images**
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-
-Have fun with JavaScript!
+This project showcases responsive web development and basic javascript. The layout and positioning of each section will depend on the size of the screen being used. Written in HTML and CSS using media queries to address responsive requirements with javascript handling user editing. The website can be found at: https://shaheenhad.github.io/web_project_4/

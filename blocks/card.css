@@ -19,6 +19,7 @@
   width: 246px;
   margin-left: 21px;
   justify-content: space-between;
+  align-items: center;
 }
 
 .card__title {
@@ -33,14 +34,21 @@
 }
 
 .card__like {
-  cursor: pointer;
-  margin: 0;
-  border: none;
-  background-color: transparent;
-  padding: 0;
-}
-
-.card__like-image {
   width: 21px;
   height: 19px;
+
+  cursor: pointer;
+  background-image: url("../images/heart_disabled.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color: transparent;
+  margin: 0;
+  border: none;
+  padding: 0;
+  transition: opacity, 0.1s linear;
+}
+
+.card__like:hover {
+  opacity: 0.5;
 }
