@@ -16,7 +16,7 @@
 
 .card__info {
   display: flex;
-  padding: 25px 15px 31px 21px;
+  padding: 25px 15px 31px 25px;
   justify-content: space-between;
   align-items: center;
 }

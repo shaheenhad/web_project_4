@@ -125,6 +125,7 @@ and data for positioning purposes */
 
   .popup__title {
     font-size: 18px;
+    padding-bottom: 76px;
   }
   .popup__form-fieldset {
     width: 238px;

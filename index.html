@@ -112,9 +112,9 @@
       <footer class="footer">
         <p class="footer__text">© 2021 Around The U.S.</p>
       </footer>
-      <div class="popup">
+      <div class="popup popup_edit-button">
         <div class="popup__container">
-          <button type="button" class="popup__close"></button>
+          <button type="button" class="popup__close popup__close_edit"></button>
           <form name="popup-form" class="popup__form">
             <h2 class="popup__title">Edit profile</h2>
             <fieldset class="popup__form-fieldset">
@@ -138,6 +138,32 @@
         </div>
       </div>
     </div>
+    <div class="popup popup_add-button">
+      <div class="popup__container">
+        <button type="button" class="popup__close popup__close_add"></button>
+        <form name="popup-form" class="popup__form">
+          <h2 class="popup__title">New place</h2>
+          <fieldset class="popup__form-fieldset">
+            <input
+              class="popup__input popup__input_type_image-title"
+              type="text"
+              placeholder="Title"
+              name="name"
+              required
+            />
+            <input
+              class="popup__input popup__input_type_image"
+              type="text"
+              placeholder="Image link"
+              name="title"
+              required
+            />
+            <button type="submit" class="popup__submit-button">Create</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
