@@ -41,7 +41,7 @@
           <button type="button" class="profile__add-button"></button>
         </section>
         <section class="elements">
-          <article class="card">
+          <!-- <article class="card">
             <img
               class="card__image"
               src="./images/nyc.jpg"
@@ -106,7 +106,7 @@
               <h2 class="card__title">New Orleans</h2>
               <button type="button" class="card__like"></button>
             </div>
-          </article>
+          </article> -->
         </section>
       </main>
       <footer class="footer">
@@ -115,7 +115,7 @@
       <div class="popup popup_edit-button">
         <div class="popup__container">
           <button type="button" class="popup__close popup__close_edit"></button>
-          <form name="popup-form" class="popup__form">
+          <form id="popup-profile" class="popup__form">
             <h2 class="popup__title">Edit profile</h2>
             <fieldset class="popup__form-fieldset">
               <input
@@ -141,7 +141,7 @@
     <div class="popup popup_add-button">
       <div class="popup__container">
         <button type="button" class="popup__close popup__close_add"></button>
-        <form name="popup-form" class="popup__form">
+        <form id="popup-add-card" class="popup__form">
           <h2 class="popup__title">New place</h2>
           <fieldset class="popup__form-fieldset">
             <input
@@ -164,6 +164,16 @@
       </div>
     </div>
   </div>
+  <template id="card-template">
+    <article class="card">
+      <div class="card__image"></div>
+        
+      <div class="card__info">
+        <h2 class="card__title"></h2>
+        <button type="button" class="card__like"></button>
+      </div>
+    </article>
+  </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
