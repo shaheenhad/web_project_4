@@ -147,10 +147,8 @@ function generateCard(card) {
 
   imageEl.addEventListener("click", () => {
     imagePopup.classList.add("popup_is-visible");
-    // imagePopup.querySelector(
-    //   ".popup__image"
-    // ).style.backgroundImage = `url(${card.link})`;
     imagePopup.querySelector(".popup__image").src = card.link;
+    imagePopup.querySelector(".popup__image").alt = card.title;
     imagePopup.querySelector(".popup__caption").textContent = card.title;
   });
   return cardClone;
