@@ -34,7 +34,7 @@ const addPopup = page.querySelector(".popup_type_add");
 const popupProfileForm = page.querySelector("#popup-profile");
 const popupAddForm = page.querySelector("#popup-add-card");
 const elements = page.querySelector(".elements");
-
+const imagePopup = page.querySelector(".popup_type_image");
 /* -------------------------------------------------------------------------- */
 /*                                   Buttons                                  */
 /* -------------------------------------------------------------------------- */
@@ -42,7 +42,7 @@ const editButton = page.querySelector(".profile__edit-button");
 const addButton = page.querySelector(".profile__add-button");
 const closeButtonEdit = page.querySelector(".popup__close_edit");
 const closeButtonAdd = page.querySelector(".popup__close_add");
-const likeButton = page.querySelector(".card__like");
+const closeButtonImage = page.querySelector(".popup__close_image");
 /* -------------------------------------------------------------------------- */
 /*                                   Inputs                                   */
 /* -------------------------------------------------------------------------- */
@@ -122,7 +122,6 @@ function createButtonHandler(e) {
   };
 
   const newCard = generateCard(newCardObject);
-  console.log(newCardObject);
   renderNewCard(newCard, elements);
   // remove input data upon submit
   addPopupImageTitle.value = "";
@@ -135,7 +134,25 @@ function generateCard(card) {
   cardClone.querySelector(".card__title").textContent = card.title;
   const imageEl = cardClone.querySelector(".card__image");
   imageEl.style.backgroundImage = `url(${card.link})`;
-  likeButton.addEventListener("click", likeButtonHandler);
+  // add event listeners to be card specific
+  const likeButton = cardClone.querySelector(".card__like");
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like_clicked");
+  });
+
+  const trashButton = cardClone.querySelector(".card__trash");
+  trashButton.addEventListener("click", () => {
+    trashButton.parentNode.remove();
+  });
+
+  imageEl.addEventListener("click", () => {
+    imagePopup.classList.add("popup_is-visible");
+    // imagePopup.querySelector(
+    //   ".popup__image"
+    // ).style.backgroundImage = `url(${card.link})`;
+    imagePopup.querySelector(".popup__image").src = card.link;
+    imagePopup.querySelector(".popup__caption").textContent = card.title;
+  });
   return cardClone;
 }
 
@@ -144,10 +161,6 @@ function renderCard(card, container) {
 }
 function renderNewCard(card, container) {
   container.prepend(card);
-}
-
-function likeButtonHandler() {
-  likeButton.classList.toggle("card__like_clicked");
 }
 
 /* -------------------------------------------------------------------------- */
@@ -160,3 +173,6 @@ popupProfileForm.addEventListener("submit", saveProfile);
 addButton.addEventListener("click", addButtonHandler);
 closeButtonAdd.addEventListener("click", closeAddPopup);
 popupAddForm.addEventListener("submit", createButtonHandler);
+closeButtonImage.addEventListener("click", () => {
+  imagePopup.classList.remove("popup_is-visible");
+});
