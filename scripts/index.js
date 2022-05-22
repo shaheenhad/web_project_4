@@ -42,7 +42,7 @@ const editButton = page.querySelector(".profile__edit-button");
 const addButton = page.querySelector(".profile__add-button");
 const closeButtonEdit = page.querySelector(".popup__close_edit");
 const closeButtonAdd = page.querySelector(".popup__close_add");
-
+const likeButton = page.querySelector(".card__like");
 /* -------------------------------------------------------------------------- */
 /*                                   Inputs                                   */
 /* -------------------------------------------------------------------------- */
@@ -124,6 +124,7 @@ function createButtonHandler(e) {
   const newCard = generateCard(newCardObject);
   console.log(newCardObject);
   renderNewCard(newCard, elements);
+  // remove input data upon submit
   addPopupImageTitle.value = "";
   addPopupImageLink.value = "";
   closeAddPopup();
@@ -134,6 +135,7 @@ function generateCard(card) {
   cardClone.querySelector(".card__title").textContent = card.title;
   const imageEl = cardClone.querySelector(".card__image");
   imageEl.style.backgroundImage = `url(${card.link})`;
+  likeButton.addEventListener("click", likeButtonHandler);
   return cardClone;
 }
 
@@ -142,6 +144,10 @@ function renderCard(card, container) {
 }
 function renderNewCard(card, container) {
   container.prepend(card);
+}
+
+function likeButtonHandler() {
+  likeButton.classList.toggle("card__like_clicked");
 }
 
 /* -------------------------------------------------------------------------- */

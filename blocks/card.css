@@ -14,6 +14,29 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
+}
+
+.card__trash {
+  width: 18px;
+  height: 19.3px;
+  cursor: pointer;
+  background-image: url("../images/trash_button.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color: transparent;
+  margin: 0;
+  border: none;
+  padding: 0;
+  position: absolute;
+  right: 15px;
+  top: 18px;
+  transition: opacity, 0.1s linear;
+}
+
+.card__trash:hover {
+  opacity: 0.6;
 }
 
 .card__info {
@@ -51,4 +74,8 @@
 
 .card__like:hover {
   opacity: 0.5;
+}
+
+.card__like_clicked {
+  background-image: url("../images/heart_active.svg");
 }
