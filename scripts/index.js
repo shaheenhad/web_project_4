@@ -25,21 +25,33 @@ const initialCards = [
   },
 ];
 
+/* -------------------------------------------------------------------------- */
+/*                                  Wrappers                                  */
+/* -------------------------------------------------------------------------- */
 const page = document.querySelector(".page");
-const editButton = page.querySelector(".profile__edit-button");
-const addButton = page.querySelector(".profile__add-button");
-const editPopup = page.querySelector(".popup_edit-button");
-const addPopup = page.querySelector(".popup_add-button");
-const closeButtonEdit = page.querySelector(".popup__close_edit");
-const closeButtonAdd = page.querySelector(".popup__close_add");
-const profileName = page.querySelector(".profile__name");
-const profileTitle = page.querySelector(".profile__description");
-const popupName = page.querySelector(".popup__input_type_name");
-const popupTitle = page.querySelector(".popup__input_type_title");
+const editPopup = page.querySelector(".popup_type_edit");
+const addPopup = page.querySelector(".popup_type_add");
 const popupProfileForm = page.querySelector("#popup-profile");
 const popupAddForm = page.querySelector("#popup-add-card");
 const elements = page.querySelector(".elements");
 
+/* -------------------------------------------------------------------------- */
+/*                                   Buttons                                  */
+/* -------------------------------------------------------------------------- */
+const editButton = page.querySelector(".profile__edit-button");
+const addButton = page.querySelector(".profile__add-button");
+const closeButtonEdit = page.querySelector(".popup__close_edit");
+const closeButtonAdd = page.querySelector(".popup__close_add");
+
+/* -------------------------------------------------------------------------- */
+/*                                   Inputs                                   */
+/* -------------------------------------------------------------------------- */
+const profileName = page.querySelector(".profile__name");
+const profileTitle = page.querySelector(".profile__description");
+const popupName = page.querySelector(".popup__input_type_name");
+const popupTitle = page.querySelector(".popup__input_type_title");
+const addPopupImageTitle = page.querySelector(".popup__input_type_image-title");
+const addPopupImageLink = page.querySelector(".popup__input_type_image");
 /* -------------------------------------------------------------------------- */
 /*                                  Templates                                 */
 /* -------------------------------------------------------------------------- */
@@ -54,13 +66,11 @@ const cardTemplate = page
 // load initial cards
 
 initialCards.forEach(function (card) {
-  const cardClone = cardTemplate.cloneNode(true);
-  cardClone.querySelector(".card__title").textContent = card.title;
-  cardClone.querySelector(
-    ".card__image"
-  ).style.backgroundImage = `url(${card.link})`;
-  elements.append(cardClone);
+  const newCard = generateCard(card);
+  renderCard(newCard, elements);
 });
+
+/* -------------------------- Edit popup features -------------------------- */
 
 // make popup visible when edit button is clicked
 
@@ -90,7 +100,7 @@ function saveProfile(e) {
   closeEditPopup();
 }
 
-// add button/popup functionality
+/* --------------------------- Add popup features -------------------------- */
 function addButtonHandler() {
   addPopup.classList.add("popup_is-visible");
 }
@@ -103,21 +113,35 @@ function createButtonHandler(e) {
   e.preventDefault();
 
   // get input value for new card
-  const cardTitle = page.querySelector(".popup__input_type_image-title").value;
-  const cardLink = page.querySelector(".popup__input_type_image").value;
+  const cardTitle = addPopupImageTitle.value;
+  const cardLink = addPopupImageLink.value;
 
-  // create object
-  const cardObject = [
-    {
-      title: cardTitle,
-      link: cardLink,
-    },
-  ];
+  const newCardObject = {
+    title: cardTitle,
+    link: cardLink,
+  };
 
-  console.log(cardObject);
-  initialCards.push(cardObject);
-
+  const newCard = generateCard(newCardObject);
+  console.log(newCardObject);
+  renderNewCard(newCard, elements);
+  addPopupImageTitle.value = "";
+  addPopupImageLink.value = "";
   closeAddPopup();
+}
+
+function generateCard(card) {
+  const cardClone = cardTemplate.cloneNode(true);
+  cardClone.querySelector(".card__title").textContent = card.title;
+  const imageEl = cardClone.querySelector(".card__image");
+  imageEl.style.backgroundImage = `url(${card.link})`;
+  return cardClone;
+}
+
+function renderCard(card, container) {
+  container.append(card);
+}
+function renderNewCard(card, container) {
+  container.prepend(card);
 }
 
 /* -------------------------------------------------------------------------- */
