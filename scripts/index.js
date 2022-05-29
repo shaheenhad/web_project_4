@@ -73,6 +73,16 @@ initialCards.forEach(function (card) {
 
 function openPopup(popup) {
   popup.classList.add("popup_is-visible");
+  page.addEventListener("keydown", function (evt) {
+    if (evt.key === "Escape") {
+      closePopup(popup);
+    }
+  });
+  page.addEventListener("click", function (evt) {
+    if (evt.closest(".popup")) {
+      closePopup(popup);
+    }
+  });
 }
 
 function closePopup(popup) {
