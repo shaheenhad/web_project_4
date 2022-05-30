@@ -78,8 +78,8 @@ function openPopup(popup) {
       closePopup(popup);
     }
   });
-  page.addEventListener("click", function (evt) {
-    if (evt.closest(".popup")) {
+  page.addEventListener("mousedown", function (evt) {
+    if (evt.target.matches(".popup")) {
       closePopup(popup);
     }
   });
