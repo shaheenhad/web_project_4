@@ -73,20 +73,22 @@ initialCards.forEach(function (card) {
 
 function openPopup(popup) {
   popup.classList.add("popup_is-visible");
-  page.addEventListener("keydown", function (evt) {
-    if (evt.key === "Escape") {
-      closePopup(popup);
-    }
-  });
-  page.addEventListener("mousedown", function (evt) {
-    if (evt.target.matches(".popup")) {
-      closePopup(popup);
-    }
-  });
+  page.addEventListener("keydown", evtClosePopup);
+  page.addEventListener("mousedown", evtClosePopup);
+}
+
+function evtClosePopup(evt) {
+  if (evt.key === "Escape" || evt.target.matches(".popup")) {
+    closePopup(editPopup);
+    closePopup(addPopup);
+    closePopup(imagePopup);
+  }
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_is-visible");
+  page.removeEventListener("keydown", evtClosePopup);
+  page.removeEventListener("mousedown", evtClosePopup);
 }
 
 /* -------------------------- Edit popup features -------------------------- */
