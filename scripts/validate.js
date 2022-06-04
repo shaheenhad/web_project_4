@@ -5,7 +5,7 @@ const showInputError = (formEl, inputEl, errorMessage, options) => {
   errorElement.classList.add(options.errorClass);
 };
 
-function errorReset(errorElement) {
+function resetError(errorElement) {
   errorElement.textContent = "";
 }
 const hideInputError = (formEl, inputEl, options) => {
@@ -15,7 +15,7 @@ const hideInputError = (formEl, inputEl, options) => {
   const { errorClass } = options;
   errorElement.classList.remove(errorClass);
   // time delay to allow css transition to show effect
-  setTimeout(() => errorReset(errorElement), 100);
+  setTimeout(() => resetError(errorElement), 100);
 };
 
 function isValid(formEl, inputEl, options) {
@@ -73,14 +73,5 @@ function enableValidation(options) {
     setEventListeners(formEl, options);
   });
 }
-
-const config = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__submit-button",
-  inactiveButtonClass: "popup__submit-button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_visible",
-};
 
 enableValidation(config);

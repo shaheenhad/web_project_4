@@ -25,6 +25,15 @@ const initialCards = [
   },
 ];
 
+const config = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit-button",
+  inactiveButtonClass: "popup__submit-button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_visible",
+};
+
 /* -------------------------------------------------------------------------- */
 /*                                  Wrappers                                  */
 /* -------------------------------------------------------------------------- */
@@ -44,6 +53,7 @@ const addButton = page.querySelector(".profile__add-button");
 const closeButtonEdit = page.querySelector(".popup__close_edit");
 const closeButtonAdd = page.querySelector(".popup__close_add");
 const closeButtonImage = page.querySelector(".popup__close_image");
+const createNewCardButton = addPopup.querySelector(".popup__submit-button");
 /* -------------------------------------------------------------------------- */
 /*                                   Inputs                                   */
 /* -------------------------------------------------------------------------- */
@@ -73,22 +83,28 @@ initialCards.forEach(function (card) {
 
 function openPopup(popup) {
   popup.classList.add("popup_is-visible");
-  page.addEventListener("keydown", evtClosePopup);
-  page.addEventListener("mousedown", evtClosePopup);
+  page.addEventListener("keydown", handleClosePopupEsc);
+  page.addEventListener("mousedown", handleClosePopupClick);
 }
 
-function evtClosePopup(evt) {
-  if (evt.key === "Escape" || evt.target.matches(".popup")) {
-    closePopup(editPopup);
-    closePopup(addPopup);
-    closePopup(imagePopup);
+function handleClosePopupEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = page.querySelector(".popup_is-visible");
+    closePopup(openedPopup);
+  }
+}
+
+function handleClosePopupClick(evt) {
+  if (evt.target.matches(".popup")) {
+    const openedPopup = page.querySelector(".popup_is-visible");
+    closePopup(openedPopup);
   }
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_is-visible");
-  page.removeEventListener("keydown", evtClosePopup);
-  page.removeEventListener("mousedown", evtClosePopup);
+  page.removeEventListener("keydown", handleClosePopupEsc);
+  page.removeEventListener("mousedown", handleClosePopupClick);
 }
 
 /* -------------------------- Edit popup features -------------------------- */
@@ -132,8 +148,8 @@ function createButtonHandler(e) {
   const newCard = generateCard(newCardObject);
   renderNewCard(newCard, elements);
   // remove input data upon submit
-  addPopupImageTitle.value = "";
-  addPopupImageLink.value = "";
+  popupAddForm.reset();
+  disableButton(createNewCardButton, config.inactiveButtonClass);
   closePopup(addPopup);
 }
 
