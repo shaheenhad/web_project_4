@@ -1,3 +1,5 @@
+import FormValidator from "./FormValidator.js";
+
 const initialCards = [
   {
     title: "Yosemite Valley",
@@ -25,8 +27,7 @@ const initialCards = [
   },
 ];
 
-const config = {
-  formSelector: ".popup__form",
+const settings = {
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__submit-button",
   inactiveButtonClass: "popup__submit-button_disabled",
@@ -149,7 +150,6 @@ function createButtonHandler(e) {
   renderNewCard(newCard, elements);
   // remove input data upon submit
   popupAddForm.reset();
-  disableButton(createNewCardButton, config.inactiveButtonClass);
   closePopup(addPopup);
 }
 
@@ -196,3 +196,8 @@ addButton.addEventListener("click", () => openPopup(addPopup));
 closeButtonAdd.addEventListener("click", () => closePopup(addPopup));
 popupAddForm.addEventListener("submit", createButtonHandler);
 closeButtonImage.addEventListener("click", () => closePopup(imagePopup));
+
+const editFormValidator = new FormValidator(settings, popupProfileForm);
+const addFormValidator = new FormValidator(settings, popupAddForm);
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
