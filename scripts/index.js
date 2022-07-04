@@ -1,4 +1,5 @@
 import FormValidator from "./FormValidator.js";
+import Card from "./Card.js";
 
 const initialCards = [
   {
@@ -54,7 +55,6 @@ const addButton = page.querySelector(".profile__add-button");
 const closeButtonEdit = page.querySelector(".popup__close_edit");
 const closeButtonAdd = page.querySelector(".popup__close_add");
 const closeButtonImage = page.querySelector(".popup__close_image");
-const createNewCardButton = addPopup.querySelector(".popup__submit-button");
 /* -------------------------------------------------------------------------- */
 /*                                   Inputs                                   */
 /* -------------------------------------------------------------------------- */
@@ -67,10 +67,10 @@ const addPopupImageLink = page.querySelector(".popup__input_type_image");
 /* -------------------------------------------------------------------------- */
 /*                                  Templates                                 */
 /* -------------------------------------------------------------------------- */
-const cardTemplate = page
-  .querySelector("#card-template")
-  .content.querySelector(".card");
-
+// const cardTemplate = page
+//   .querySelector("#card-template")
+//   .content.querySelector(".card");
+const cardTemplateSelector = "#card-template";
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
@@ -78,8 +78,9 @@ const cardTemplate = page
 // load initial cards
 
 initialCards.forEach(function (card) {
-  const newCard = generateCard(card);
-  renderCard(newCard, elements);
+  // const newCard = generateCard(card);
+  // renderCard(newCard, elements);
+  renderCard(card, elements);
 });
 
 function openPopup(popup) {
@@ -153,33 +154,34 @@ function createButtonHandler(e) {
   closePopup(addPopup);
 }
 
-function generateCard(card) {
-  const cardClone = cardTemplate.cloneNode(true);
-  cardClone.querySelector(".card__title").textContent = card.title;
-  const imageEl = cardClone.querySelector(".card__image");
-  imageEl.style.backgroundImage = `url(${card.link})`;
-  // add event listeners to be card specific
-  const likeButton = cardClone.querySelector(".card__like");
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like_clicked");
-  });
+// function generateCard(card) {
+//   const cardClone = cardTemplate.cloneNode(true);
+//   cardClone.querySelector(".card__title").textContent = card.title;
+//   const imageEl = cardClone.querySelector(".card__image");
+//   imageEl.style.backgroundImage = `url(${card.link})`;
+//   // add event listeners to be card specific
+//   const likeButton = cardClone.querySelector(".card__like");
+//   likeButton.addEventListener("click", () => {
+//     likeButton.classList.toggle("card__like_clicked");
+//   });
 
-  const trashButton = cardClone.querySelector(".card__trash");
-  trashButton.addEventListener("click", () => {
-    trashButton.closest(".card").remove();
-  });
+//   const trashButton = cardClone.querySelector(".card__trash");
+//   trashButton.addEventListener("click", () => {
+//     trashButton.closest(".card").remove();
+//   });
 
-  imageEl.addEventListener("click", () => {
-    openPopup(imagePopup);
-    imagePopupImage.src = card.link;
-    imagePopupImage.alt = card.title;
-    imagePopup.querySelector(".popup__caption").textContent = card.title;
-  });
-  return cardClone;
-}
+//   imageEl.addEventListener("click", () => {
+//     openPopup(imagePopup);
+//     imagePopupImage.src = card.link;
+//     imagePopupImage.alt = card.title;
+//     imagePopup.querySelector(".popup__caption").textContent = card.title;
+//   });
+//   return cardClone;
+// }
 
 function renderCard(card, container) {
-  container.append(card);
+  const initCard = new Card(card, cardTemplateSelector);
+  container.append(initCard.getView());
 }
 function renderNewCard(card, container) {
   container.prepend(card);
