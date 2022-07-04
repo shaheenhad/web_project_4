@@ -1,3 +1,6 @@
+import { openPopup } from "./utils.js";
+import { imagePopup, imagePopupImage } from "./index.js";
+
 class Card {
   constructor(data, templateSelector) {
     this._title = data.title;
