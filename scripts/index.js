@@ -1,6 +1,7 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
 import { openPopup, closePopup } from "./utils.js";
+import Section from "./Section.js";
 
 const initialCards = [
   {
