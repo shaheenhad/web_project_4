@@ -77,9 +77,9 @@ const cardTemplateSelector = "#card-template";
 
 // load initial cards
 
-initialCards.forEach(function (card) {
-  renderCard(card, elements);
-});
+// initialCards.forEach(function (card) {
+//   renderCard(card, elements);
+// });
 
 /* -------------------------- Edit popup features -------------------------- */
 
@@ -125,10 +125,24 @@ function createButtonHandler(e) {
   closePopup(addPopup);
 }
 
-function renderCard(card, container) {
-  const newCard = new Card(card, cardTemplateSelector);
-  container.append(newCard.getView());
-}
+// function renderCard(card, container) {
+//   const newCard = new Card(card, cardTemplateSelector);
+//   container.append(newCard.getView());
+// }
+
+const initialCardList = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const newCard = new Card(item, cardTemplateSelector);
+      const cardEl = newCard.getView();
+      initialCardList.addItem(cardEl);
+    },
+  },
+  ".elements"
+);
+initialCardList.renderItems();
+
 function renderNewCard(newCardObject, container) {
   const newCard = new Card(newCardObject, cardTemplateSelector);
   container.prepend(newCard.getView());
