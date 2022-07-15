@@ -1,7 +1,8 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
-import { openPopup, closePopup } from "./utils.js";
+// import { openPopup, closePopup } from "./utils.js";
 import Section from "./Section.js";
+import PopupWithForm from "./PopupWithForm.js";
 
 const initialCards = [
   {
@@ -42,13 +43,13 @@ const settings = {
 /*                                  Wrappers                                  */
 /* -------------------------------------------------------------------------- */
 const page = document.querySelector(".page");
-const editPopup = page.querySelector(".popup_type_edit");
-const addPopup = page.querySelector(".popup_type_add");
+// const editPopup = page.querySelector(".popup_type_edit");
+// const addPopup = page.querySelector(".popup_type_add");
 const popupProfileForm = page.querySelector("#popup-profile");
 const popupAddForm = page.querySelector("#popup-add-card");
 const elements = page.querySelector(".elements");
-const imagePopup = page.querySelector(".popup_type_image");
-const imagePopupImage = imagePopup.querySelector(".popup__image");
+// const imagePopup = page.querySelector(".popup_type_image");
+// const imagePopupImage = imagePopup.querySelector(".popup__image");
 /* -------------------------------------------------------------------------- */
 /*                                   Buttons                                  */
 /* -------------------------------------------------------------------------- */
@@ -74,12 +75,6 @@ const cardTemplateSelector = "#card-template";
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
-
-// load initial cards
-
-// initialCards.forEach(function (card) {
-//   renderCard(card, elements);
-// });
 
 /* -------------------------- Edit popup features -------------------------- */
 
@@ -152,17 +147,23 @@ function renderNewCard(newCardObject, container) {
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
 
-editButton.addEventListener("click", editProfile);
-closeButtonEdit.addEventListener("click", () => closePopup(editPopup));
-popupProfileForm.addEventListener("submit", saveProfile);
-addButton.addEventListener("click", () => openPopup(addPopup));
-closeButtonAdd.addEventListener("click", () => closePopup(addPopup));
-popupAddForm.addEventListener("submit", createButtonHandler);
-closeButtonImage.addEventListener("click", () => closePopup(imagePopup));
+// editButton.addEventListener("click", editProfile);
+// closeButtonEdit.addEventListener("click", () => closePopup(editPopup));
+// popupProfileForm.addEventListener("submit", saveProfile);
+// addButton.addEventListener("click", () => openPopup(addPopup));
+// closeButtonAdd.addEventListener("click", () => closePopup(addPopup));
+// popupAddForm.addEventListener("submit", createButtonHandler);
+// closeButtonImage.addEventListener("click", () => closePopup(imagePopup));
 
 const editFormValidator = new FormValidator(settings, popupProfileForm);
 const addFormValidator = new FormValidator(settings, popupAddForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-export { imagePopup, imagePopupImage };
+const editPopup = new PopupWithForm(".popup_type_edit");
+editPopup.setEventListeners();
+editButton.addEventListener("click", editPopup.open);
+
+// const addPopup = new Popup(".popup_type_add");
+// addPopup.setEventListeners();
+// addButton.addEventListener("click", addPopup.open);

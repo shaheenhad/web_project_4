@@ -1,5 +1,4 @@
-import { openPopup } from "./utils.js";
-import { imagePopup, imagePopupImage } from "./index.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 class Card {
   constructor(data, templateSelector) {
@@ -25,10 +24,13 @@ class Card {
   }
 
   _handleImagePreview() {
-    openPopup(imagePopup);
-    imagePopupImage.src = this._link;
-    imagePopupImage.alt = this._title;
-    imagePopup.querySelector(".popup__caption").textContent = this._title;
+    const imgPrev = new PopupWithImage(
+      ".popup_type_image",
+      this._title,
+      this._link
+    );
+    imgPrev.setEventListeners();
+    imgPrev.open();
   }
 
   _setEventListeners() {
