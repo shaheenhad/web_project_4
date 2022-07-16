@@ -44,74 +44,26 @@ const settings = {
 /*                                  Wrappers                                  */
 /* -------------------------------------------------------------------------- */
 const page = document.querySelector(".page");
-// const editPopup = page.querySelector(".popup_type_edit");
-// const addPopup = page.querySelector(".popup_type_add");
 const popupProfileForm = page.querySelector("#popup-profile");
 const popupAddForm = page.querySelector("#popup-add-card");
-const elements = page.querySelector(".elements");
-// const imagePopup = page.querySelector(".popup_type_image");
-// const imagePopupImage = imagePopup.querySelector(".popup__image");
+const cardElements = ".elements";
 /* -------------------------------------------------------------------------- */
 /*                                   Buttons                                  */
 /* -------------------------------------------------------------------------- */
 const editButton = page.querySelector(".profile__edit-button");
 const addButton = page.querySelector(".profile__add-button");
-const closeButtonEdit = page.querySelector(".popup__close_edit");
-const closeButtonAdd = page.querySelector(".popup__close_add");
-const closeButtonImage = page.querySelector(".popup__close_image");
 /* -------------------------------------------------------------------------- */
 /*                                   Inputs                                   */
 /* -------------------------------------------------------------------------- */
-const profileName = page.querySelector(".profile__name");
-const profileTitle = page.querySelector(".profile__description");
+const profileName = ".profile__name";
+const profileTitle = ".profile__description";
 const popupName = page.querySelector(".popup__input_type_name");
 const popupTitle = page.querySelector(".popup__input_type_title");
-const addPopupImageTitle = page.querySelector(".popup__input_type_image-title");
-const addPopupImageLink = page.querySelector(".popup__input_type_image");
 /* -------------------------------------------------------------------------- */
 /*                                  Templates                                 */
 /* -------------------------------------------------------------------------- */
 
 const cardTemplateSelector = "#card-template";
-/* -------------------------------------------------------------------------- */
-/*                                  Functions                                 */
-/* -------------------------------------------------------------------------- */
-
-/* -------------------------- Edit popup features -------------------------- */
-
-// make popup visible when edit button is clicked
-
-function editProfile() {
-  openPopup(editPopup);
-
-  // keep profile info when popup is opened
-
-  popupName.value = profileName.textContent;
-  popupTitle.value = profileTitle.textContent;
-}
-
-// save new input data when save button is used
-
-// function saveProfile(e) {
-//   e.preventDefault();
-
-//   profileName.textContent = popupName.value;
-//   profileTitle.textContent = popupTitle.value;
-
-//   closePopup(editPopup);
-// }
-
-/* -------------------------------------------------------------------------- */
-/*                               Event Handlers                               */
-/* -------------------------------------------------------------------------- */
-
-// editButton.addEventListener("click", editProfile);
-// closeButtonEdit.addEventListener("click", () => closePopup(editPopup));
-// popupProfileForm.addEventListener("submit", saveProfile);
-// addButton.addEventListener("click", () => openPopup(addPopup));
-// closeButtonAdd.addEventListener("click", () => closePopup(addPopup));
-// popupAddForm.addEventListener("submit", createButtonHandler);
-// closeButtonImage.addEventListener("click", () => closePopup(imagePopup));
 
 const cardList = new Section(
   {
@@ -124,13 +76,13 @@ const cardList = new Section(
       cardList.addItem(newCard.getView());
     },
   },
-  ".elements"
+  cardElements
 );
 cardList.renderItems();
 
 const userInfo = new UserInfo({
-  usernameSelector: ".profile__name",
-  jobSelector: ".profile__description",
+  usernameSelector: profileName,
+  titleSelector: profileTitle,
 });
 
 const imagePopup = new PopupWithImage(".popup_type_image");
@@ -140,11 +92,16 @@ const addFormValidator = new FormValidator(settings, popupAddForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-const editPopup = new PopupWithForm(".popup_type_edit", () => {
+const editPopup = new PopupWithForm(".popup_type_edit", (data) => {
+  userInfo.setUserInfo(data);
   editPopup.close();
 });
 editPopup.setEventListeners();
-editButton.addEventListener("click", editPopup.open);
+editButton.addEventListener("click", () => {
+  popupName.value = userInfo.getUserInfo().name;
+  popupTitle.value = userInfo.getUserInfo().title;
+  editPopup.open();
+});
 
 const addPopup = new PopupWithForm(".popup_type_add", (data) => {
   const newCard = new Card(data, cardTemplateSelector, () => {

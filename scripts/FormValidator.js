@@ -54,7 +54,6 @@ class FormValidator {
       this._disableButton();
       return;
     }
-
     this._enableButton();
   }
 
@@ -75,7 +74,7 @@ class FormValidator {
   enableValidation() {
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._toggleButtonState();
+      this._disableButton();
     });
 
     this._setEventListeners();
