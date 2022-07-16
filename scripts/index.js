@@ -1,8 +1,8 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
-// import { openPopup, closePopup } from "./utils.js";
 import Section from "./Section.js";
 import PopupWithForm from "./PopupWithForm.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 const initialCards = [
   {
@@ -91,39 +91,57 @@ function editProfile() {
 
 // save new input data when save button is used
 
-function saveProfile(e) {
-  e.preventDefault();
+// function saveProfile(e) {
+//   e.preventDefault();
 
-  profileName.textContent = popupName.value;
-  profileTitle.textContent = popupTitle.value;
+//   profileName.textContent = popupName.value;
+//   profileTitle.textContent = popupTitle.value;
 
-  closePopup(editPopup);
-}
+//   closePopup(editPopup);
+// }
 
 /* --------------------------- Add popup features -------------------------- */
 
-function createButtonHandler(e) {
-  e.preventDefault();
+// function createButtonHandler() {
+//   e.preventDefault();
 
-  // get input value for new card
-  const cardTitle = addPopupImageTitle.value;
-  const cardLink = addPopupImageLink.value;
+//   // get input value for new card
+//   const cardTitle = addPopupImageTitle.value;
+//   const cardLink = addPopupImageLink.value;
 
-  const newCardObject = {
-    title: cardTitle,
-    link: cardLink,
-  };
+//   const newCardObject = {
+//     title: cardTitle,
+//     link: cardLink,
+//   };
 
-  renderNewCard(newCardObject, elements);
-  // remove input data upon submit
-  popupAddForm.reset();
-  closePopup(addPopup);
-}
+//   renderNewCard(newCardObject, elements);
+//   // remove input data upon submit
+//   popupAddForm.reset();
+//   closePopup(addPopup);
+
+// }
 
 // function renderCard(card, container) {
 //   const newCard = new Card(card, cardTemplateSelector);
 //   container.append(newCard.getView());
 // }
+
+// function renderNewCard(newCardObject, container) {
+//   const newCard = new Card(newCardObject, cardTemplateSelector);
+//   container.prepend(newCard.getView());
+// }
+
+/* -------------------------------------------------------------------------- */
+/*                               Event Handlers                               */
+/* -------------------------------------------------------------------------- */
+
+// editButton.addEventListener("click", editProfile);
+// closeButtonEdit.addEventListener("click", () => closePopup(editPopup));
+// popupProfileForm.addEventListener("submit", saveProfile);
+// addButton.addEventListener("click", () => openPopup(addPopup));
+// closeButtonAdd.addEventListener("click", () => closePopup(addPopup));
+// popupAddForm.addEventListener("submit", createButtonHandler);
+// closeButtonImage.addEventListener("click", () => closePopup(imagePopup));
 
 const initialCardList = new Section(
   {
@@ -138,32 +156,19 @@ const initialCardList = new Section(
 );
 initialCardList.renderItems();
 
-function renderNewCard(newCardObject, container) {
-  const newCard = new Card(newCardObject, cardTemplateSelector);
-  container.prepend(newCard.getView());
-}
-
-/* -------------------------------------------------------------------------- */
-/*                               Event Handlers                               */
-/* -------------------------------------------------------------------------- */
-
-// editButton.addEventListener("click", editProfile);
-// closeButtonEdit.addEventListener("click", () => closePopup(editPopup));
-// popupProfileForm.addEventListener("submit", saveProfile);
-// addButton.addEventListener("click", () => openPopup(addPopup));
-// closeButtonAdd.addEventListener("click", () => closePopup(addPopup));
-// popupAddForm.addEventListener("submit", createButtonHandler);
-// closeButtonImage.addEventListener("click", () => closePopup(imagePopup));
-
 const editFormValidator = new FormValidator(settings, popupProfileForm);
 const addFormValidator = new FormValidator(settings, popupAddForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-const editPopup = new PopupWithForm(".popup_type_edit");
+const editPopup = new PopupWithForm(".popup_type_edit", () => {
+  editPopup.close();
+});
 editPopup.setEventListeners();
 editButton.addEventListener("click", editPopup.open);
 
-// const addPopup = new Popup(".popup_type_add");
-// addPopup.setEventListeners();
-// addButton.addEventListener("click", addPopup.open);
+const addPopup = new PopupWithForm(".popup_type_add", () => {
+  addPopup.close();
+});
+addPopup.setEventListeners();
+addButton.addEventListener("click", addPopup.open);
