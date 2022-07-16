@@ -1,10 +1,10 @@
 import PopupWithImage from "./PopupWithImage.js";
 
 class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._title = data.title;
     this._link = data.link;
-
+    this._handleCardClick = handleCardClick;
     this._template = templateSelector;
   }
 
@@ -23,16 +23,6 @@ class Card {
     this._trashButton.closest(".card").remove();
   }
 
-  _handleImagePreview() {
-    const imgPrev = new PopupWithImage(
-      ".popup_type_image",
-      this._title,
-      this._link
-    );
-    imgPrev.setEventListeners();
-    imgPrev.open();
-  }
-
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
       this._handleLikeButton();
@@ -43,7 +33,7 @@ class Card {
     });
 
     this._imageEl.addEventListener("click", () => {
-      this._handleImagePreview();
+      this._handleCardClick();
     });
   }
 

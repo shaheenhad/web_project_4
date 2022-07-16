@@ -3,6 +3,7 @@ import Card from "./Card.js";
 import Section from "./Section.js";
 import PopupWithForm from "./PopupWithForm.js";
 import PopupWithImage from "./PopupWithImage.js";
+import UserInfo from "./UserInfo.js";
 
 const initialCards = [
   {
@@ -100,37 +101,6 @@ function editProfile() {
 //   closePopup(editPopup);
 // }
 
-/* --------------------------- Add popup features -------------------------- */
-
-// function createButtonHandler() {
-//   e.preventDefault();
-
-//   // get input value for new card
-//   const cardTitle = addPopupImageTitle.value;
-//   const cardLink = addPopupImageLink.value;
-
-//   const newCardObject = {
-//     title: cardTitle,
-//     link: cardLink,
-//   };
-
-//   renderNewCard(newCardObject, elements);
-//   // remove input data upon submit
-//   popupAddForm.reset();
-//   closePopup(addPopup);
-
-// }
-
-// function renderCard(card, container) {
-//   const newCard = new Card(card, cardTemplateSelector);
-//   container.append(newCard.getView());
-// }
-
-// function renderNewCard(newCardObject, container) {
-//   const newCard = new Card(newCardObject, cardTemplateSelector);
-//   container.prepend(newCard.getView());
-// }
-
 /* -------------------------------------------------------------------------- */
 /*                               Event Handlers                               */
 /* -------------------------------------------------------------------------- */
@@ -143,18 +113,27 @@ function editProfile() {
 // popupAddForm.addEventListener("submit", createButtonHandler);
 // closeButtonImage.addEventListener("click", () => closePopup(imagePopup));
 
-const initialCardList = new Section(
+const cardList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const newCard = new Card(item, cardTemplateSelector);
-      const cardEl = newCard.getView();
-      initialCardList.addItem(cardEl);
+      const newCard = new Card(item, cardTemplateSelector, () => {
+        imagePopup.setEventListeners();
+        imagePopup.open(item);
+      });
+      cardList.addItem(newCard.getView());
     },
   },
   ".elements"
 );
-initialCardList.renderItems();
+cardList.renderItems();
+
+const userInfo = new UserInfo({
+  usernameSelector: ".profile__name",
+  jobSelector: ".profile__description",
+});
+
+const imagePopup = new PopupWithImage(".popup_type_image");
 
 const editFormValidator = new FormValidator(settings, popupProfileForm);
 const addFormValidator = new FormValidator(settings, popupAddForm);
@@ -167,7 +146,12 @@ const editPopup = new PopupWithForm(".popup_type_edit", () => {
 editPopup.setEventListeners();
 editButton.addEventListener("click", editPopup.open);
 
-const addPopup = new PopupWithForm(".popup_type_add", () => {
+const addPopup = new PopupWithForm(".popup_type_add", (data) => {
+  const newCard = new Card(data, cardTemplateSelector, () => {
+    imagePopup.setEventListeners();
+    imagePopup.open(data);
+  });
+  cardList.addItem(newCard.getView());
   addPopup.close();
 });
 addPopup.setEventListeners();

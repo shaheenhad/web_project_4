@@ -14,3 +14,5 @@ class UserInfo {
 
   setUserInfo() {}
 }
+
+export default UserInfo;
