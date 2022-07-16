@@ -1,5 +1,3 @@
-import PopupWithImage from "./PopupWithImage.js";
-
 class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._title = data.title;
