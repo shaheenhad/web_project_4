@@ -14,7 +14,6 @@
       name="keywords"
       content="HTML, CSS, Javascript, images, social, likes,"
     />
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
 
   <body class="page">
@@ -22,7 +21,7 @@
       <header class="header">
         <img
           class="logo"
-          src="./images/around_logo.svg"
+          src="<%=require('./images/around_logo.svg')%>"
           alt="around the us logo"
         />
       </header>
@@ -30,7 +29,7 @@
         <section class="profile">
           <img
             class="profile__image"
-            src="./images/profile.jpg"
+            src="<%=require('./images/profile.jpg')%>"
             alt="image of older man in blue shirt and red hat, in front of water"
           />
           <div class="profile__info">
@@ -146,6 +145,5 @@
         </div>
       </article>
     </template>
-    <script src="./scripts/index.js" type="module"></script>
   </body>
 </html>
