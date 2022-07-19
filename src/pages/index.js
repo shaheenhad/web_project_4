@@ -1,45 +1,11 @@
-import "./pages/index.css";
-import FormValidator from "./components/FormValidator.js";
-import Card from "./components/Card.js";
-import Section from "./components/Section.js";
-import PopupWithForm from "./components/PopupWithForm.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import UserInfo from "./components/UserInfo.js";
-
-const initialCards = [
-  {
-    title: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-  },
-  {
-    title: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-  },
-  {
-    title: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-  },
-  {
-    title: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-  },
-  {
-    title: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-  },
-  {
-    title: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg",
-  },
-];
-
-const settings = {
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__submit-button",
-  inactiveButtonClass: "popup__submit-button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_visible",
-};
+import { initialCards, settings } from "../utils/constants.js";
+import "./index.css";
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
+import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import UserInfo from "../components/UserInfo.js";
 
 /* -------------------------------------------------------------------------- */
 /*                                  Wrappers                                  */
@@ -56,8 +22,8 @@ const addButton = page.querySelector(".profile__add-button");
 /* -------------------------------------------------------------------------- */
 /*                                   Inputs                                   */
 /* -------------------------------------------------------------------------- */
-const profileName = ".profile__name";
-const profileTitle = ".profile__description";
+const profileNameSelector = ".profile__name";
+const profileTitleSelector = ".profile__description";
 const popupName = page.querySelector(".popup__input_type_name");
 const popupTitle = page.querySelector(".popup__input_type_title");
 /* -------------------------------------------------------------------------- */
@@ -66,24 +32,26 @@ const popupTitle = page.querySelector(".popup__input_type_title");
 
 const cardTemplateSelector = "#card-template";
 
+const renderCard = (card) => {
+  const newCard = new Card(card, cardTemplateSelector, () => {
+    imagePopup.setEventListeners();
+    imagePopup.open(card);
+  });
+  cardList.addItem(newCard.getView());
+};
+
 const cardList = new Section(
   {
     items: initialCards,
-    renderer: (item) => {
-      const newCard = new Card(item, cardTemplateSelector, () => {
-        imagePopup.setEventListeners();
-        imagePopup.open(item);
-      });
-      cardList.addItem(newCard.getView());
-    },
+    renderer: renderCard,
   },
   cardElements
 );
 cardList.renderItems();
 
 const userInfo = new UserInfo({
-  usernameSelector: profileName,
-  titleSelector: profileTitle,
+  userNameSelector: profileNameSelector,
+  titleSelector: profileTitleSelector,
 });
 
 const imagePopup = new PopupWithImage(".popup_type_image");
@@ -99,17 +67,14 @@ const editPopup = new PopupWithForm(".popup_type_edit", (data) => {
 });
 editPopup.setEventListeners();
 editButton.addEventListener("click", () => {
-  popupName.value = userInfo.getUserInfo().name;
-  popupTitle.value = userInfo.getUserInfo().title;
+  const { name, title } = userInfo.getUserInfo();
+  popupName.value = name;
+  popupTitle.value = title;
   editPopup.open();
 });
 
 const addPopup = new PopupWithForm(".popup_type_add", (data) => {
-  const newCard = new Card(data, cardTemplateSelector, () => {
-    imagePopup.setEventListeners();
-    imagePopup.open(data);
-  });
-  cardList.addItem(newCard.getView());
+  renderCard(data);
   addPopup.close();
 });
 addPopup.setEventListeners();

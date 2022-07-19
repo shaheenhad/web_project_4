@@ -18,7 +18,7 @@ class Card {
   }
 
   _handleTrashButton() {
-    this._trashButton.closest(".card").remove();
+    this._cardEl.remove();
   }
 
   _setEventListeners() {

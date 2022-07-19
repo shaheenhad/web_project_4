@@ -1,19 +1,19 @@
 class UserInfo {
-  constructor({ usernameSelector, titleSelector }) {
-    this._username = document.querySelector(usernameSelector);
+  constructor({ userNameSelector, titleSelector }) {
+    this._userName = document.querySelector(userNameSelector);
     this._title = document.querySelector(titleSelector);
   }
 
   getUserInfo() {
     const userObj = {
-      name: this._username.textContent,
+      name: this._userName.textContent,
       title: this._title.textContent,
     };
     return userObj;
   }
 
   setUserInfo({ name, title }) {
-    this._username.textContent = name;
+    this._userName.textContent = name;
     this._title.textContent = title;
   }
 }
