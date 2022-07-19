@@ -34,7 +34,6 @@ const cardTemplateSelector = "#card-template";
 
 const renderCard = (card) => {
   const newCard = new Card(card, cardTemplateSelector, () => {
-    imagePopup.setEventListeners();
     imagePopup.open(card);
   });
   cardList.addItem(newCard.getView());
@@ -55,6 +54,7 @@ const userInfo = new UserInfo({
 });
 
 const imagePopup = new PopupWithImage(".popup_type_image");
+imagePopup.setEventListeners();
 
 const editFormValidator = new FormValidator(settings, popupProfileForm);
 const addFormValidator = new FormValidator(settings, popupAddForm);
