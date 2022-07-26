@@ -1,6 +1,6 @@
 class Card {
   constructor(data, templateSelector, handleCardClick) {
-    this._title = data.title;
+    this._name = data.name;
     this._link = data.link;
     this._handleCardClick = handleCardClick;
     this._template = templateSelector;
@@ -42,7 +42,7 @@ class Card {
     this._trashButton = this._cardEl.querySelector(".card__trash");
     this._imageEl = this._cardEl.querySelector(".card__image");
 
-    this._cardEl.querySelector(".card__title").textContent = this._title;
+    this._cardEl.querySelector(".card__title").textContent = this._name;
     this._imageEl.style.backgroundImage = `url(${this._link})`;
 
     this._setEventListeners();

@@ -13,12 +13,14 @@ import UserInfo from "../components/UserInfo.js";
 const page = document.querySelector(".page");
 const popupProfileForm = page.querySelector("#popup-profile");
 const popupAddForm = page.querySelector("#popup-add-card");
+const popupProfilePicForm = page.querySelector("#popup-profile-pic");
 const cardElements = ".elements";
 /* -------------------------------------------------------------------------- */
 /*                                   Buttons                                  */
 /* -------------------------------------------------------------------------- */
 const editButton = page.querySelector(".profile__edit-button");
 const addButton = page.querySelector(".profile__add-button");
+const editProfilePicButton = page.querySelector(".profile__image");
 /* -------------------------------------------------------------------------- */
 /*                                   Inputs                                   */
 /* -------------------------------------------------------------------------- */
@@ -58,6 +60,11 @@ imagePopup.setEventListeners();
 
 const editFormValidator = new FormValidator(settings, popupProfileForm);
 const addFormValidator = new FormValidator(settings, popupAddForm);
+const profilePicFormValidator = new FormValidator(
+  settings,
+  popupProfilePicForm
+);
+profilePicFormValidator.enableValidation();
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
@@ -79,3 +86,19 @@ const addPopup = new PopupWithForm(".popup_type_add", (data) => {
 });
 addPopup.setEventListeners();
 addButton.addEventListener("click", addPopup.open);
+
+const deletePopup = new PopupWithForm(".popup_type_delete", () => {
+  deletePopup.close();
+});
+deletePopup.setEventListeners();
+
+const profilePicPopup = new PopupWithForm(
+  ".popup_type_edit-profile-pic",
+  () => {
+    profilePicPopup.close();
+  }
+);
+profilePicPopup.setEventListeners();
+editProfilePicButton.addEventListener("click", () => {
+  profilePicPopup.open();
+});

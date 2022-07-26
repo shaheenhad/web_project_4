@@ -82,6 +82,10 @@ and data for positioning purposes */
   padding-bottom: 54px;
 }
 
+.popup__title_type_delete {
+  padding-bottom: 38px;
+}
+
 .popup__form-fieldset {
   border: none;
   display: flex;
