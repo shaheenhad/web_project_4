@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg",
-  },
-];
-
 const settings = {
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__submit-button",
@@ -33,4 +6,47 @@ const settings = {
   errorClass: "popup__input-error_visible",
 };
 
-export { initialCards, settings };
+/* -------------------------------------------------------------------------- */
+/*                                  Wrappers                                  */
+/* -------------------------------------------------------------------------- */
+const page = document.querySelector(".page");
+const popupProfileForm = page.querySelector("#popup-profile");
+const popupAddForm = page.querySelector("#popup-add-card");
+const popupProfilePicForm = page.querySelector("#popup-profile-pic");
+const cardElementsSelector = ".elements";
+const profilePicSelector = ".profile__image";
+/* -------------------------------------------------------------------------- */
+/*                                   Buttons                                  */
+/* -------------------------------------------------------------------------- */
+const editButton = page.querySelector(".profile__edit-button");
+const addButton = page.querySelector(".profile__add-button");
+const editProfilePicButton = page.querySelector(".profile__image-container");
+/* -------------------------------------------------------------------------- */
+/*                                   Inputs                                   */
+/* -------------------------------------------------------------------------- */
+const profileNameSelector = ".profile__name";
+const profileTitleSelector = ".profile__description";
+const popupName = page.querySelector(".popup__input_type_name");
+const popupTitle = page.querySelector(".popup__input_type_title");
+/* -------------------------------------------------------------------------- */
+/*                                  Templates                                 */
+/* -------------------------------------------------------------------------- */
+
+const cardTemplateSelector = "#card-template";
+
+export {
+  settings,
+  popupProfileForm,
+  popupAddForm,
+  popupProfilePicForm,
+  cardElementsSelector,
+  editButton,
+  addButton,
+  editProfilePicButton,
+  profileNameSelector,
+  profileTitleSelector,
+  popupName,
+  profilePicSelector,
+  popupTitle,
+  cardTemplateSelector,
+};

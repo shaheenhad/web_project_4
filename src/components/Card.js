@@ -1,9 +1,10 @@
-class Card {
+export default class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._handleCardClick = handleCardClick;
     this._template = templateSelector;
+    this._likes = data.likes;
   }
 
   _getTemplate() {
@@ -41,14 +42,14 @@ class Card {
     this._likeButton = this._cardEl.querySelector(".card__like");
     this._trashButton = this._cardEl.querySelector(".card__trash");
     this._imageEl = this._cardEl.querySelector(".card__image");
+    this._likesTotal = this._cardEl.querySelector(".card__like-num");
 
     this._cardEl.querySelector(".card__title").textContent = this._name;
     this._imageEl.style.backgroundImage = `url(${this._link})`;
+    this._likesTotal.textContent = this._likes.length;
 
     this._setEventListeners();
 
     return this._cardEl;
   }
 }
-
-export default Card;

@@ -8,11 +8,11 @@ class PopupWithImage extends Popup {
     this.open = this.open.bind(this);
   }
 
-  open({ link, title }) {
+  open({ link, name }) {
     super.open();
     this._imagePopupImage.src = link;
-    this._imagePopupImage.alt = title;
-    this._imagePopupCaption.textContent = title;
+    this._imagePopupImage.alt = name;
+    this._imagePopupCaption.textContent = name;
   }
 }
 
