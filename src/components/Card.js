@@ -1,17 +1,13 @@
 export default class Card {
-  constructor(
-    data,
-    templateSelector,
-    handleCardClick,
-    handleTrashButtonClick,
-    toggleLike
-  ) {
+  constructor(data, templateSelector, handleCardClick, handleTrashButtonClick) {
     this._name = data.name;
     this._link = data.link;
     this._handleCardClick = handleCardClick;
     this._template = templateSelector;
     this._likes = data.likes;
     this._handleTrashButtonClick = handleTrashButtonClick;
+    this._ownerId = data.owner._id;
+    this._userId = data.userId;
   }
 
   _getTemplate() {
@@ -50,6 +46,10 @@ export default class Card {
     this._cardEl.querySelector(".card__title").textContent = this._name;
     this._imageEl.style.backgroundImage = `url(${this._link})`;
     this._likesTotal.textContent = this._likes.length;
+
+    if (this._ownerId !== this._userId) {
+      this._trashButton.remove();
+    }
 
     this._setEventListeners();
 

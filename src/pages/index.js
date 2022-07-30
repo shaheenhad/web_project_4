@@ -42,17 +42,26 @@ function handleTrashButtonClick(card) {
 }
 
 let cardList;
-let userId;
 
 api
   .initialize()
   .then((res) => {
     const [user, data] = res;
-    console.log(data);
+
     cardList = new Section(
       {
         items: data,
-        renderer: renderCard,
+        renderer: (item) => {
+          const userId = user._id;
+          renderCard({
+            name: item.name,
+            link: item.link,
+            likes: item.likes,
+            owner: item.owner,
+            _id: item._id,
+            userId,
+          });
+        },
       },
       cardElementsSelector
     );
@@ -145,7 +154,14 @@ function handleNewCardSubmit(data) {
   api
     .addCard({ title: data.name, link: data.link })
     .then((res) => {
-      renderCard(res);
+      renderCard({
+        name: res.name,
+        link: res.link,
+        likes: res.likes,
+        owner: res.owner,
+        _id: res._id,
+        userId,
+      });
     })
     .catch((err) => {
       console.log(err);
