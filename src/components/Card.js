@@ -8,6 +8,7 @@ export default class Card {
     this._handleTrashButtonClick = handleTrashButtonClick;
     this._ownerId = data.owner._id;
     this._userId = data.userId;
+    this._id = data._id;
   }
 
   _getTemplate() {
@@ -27,12 +28,21 @@ export default class Card {
     });
 
     this._trashButton.addEventListener("click", () => {
-      this._handleTrashButtonClick();
+      this._handleTrashButtonClick(this);
     });
 
     this._imageEl.addEventListener("click", () => {
       this._handleCardClick({ link: this._link, name: this._name });
     });
+  }
+
+  getCardId() {
+    return this._id;
+  }
+
+  handleDelete() {
+    this._cardEl.remove();
+    this._cardEl = null;
   }
 
   getView() {

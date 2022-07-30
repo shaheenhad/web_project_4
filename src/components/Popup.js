@@ -22,6 +22,18 @@ class Popup {
     }
   }
 
+  renderSaving(isSaving, formType) {
+    if (isSaving) {
+      this._submitButton.textContent = "Saving...";
+    } else if (formType === "edit") {
+      this._submitButton.textContent = "Save";
+    } else if (formType === "add") {
+      this._submitButton.textContent = "Create";
+    } else if (formType === "delete") {
+      this._submitButton.textContent = "Yes";
+    }
+  }
+
   setEventListeners() {
     this._popupCloseButton = this._popup.querySelector(".popup__close");
     this._popupCloseButton.addEventListener("click", this.close);

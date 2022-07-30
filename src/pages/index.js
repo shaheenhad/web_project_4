@@ -22,6 +22,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import { api } from "../components/Api";
+import PopupWithDeleteConfirm from "../components/PopupWithDeleteConfirm.js";
 
 const renderCard = (card) => {
   const newCard = new Card(
@@ -106,9 +107,10 @@ const addPopup = new PopupWithForm(".popup_type_add", handleNewCardSubmit);
 addPopup.setEventListeners();
 addButton.addEventListener("click", addPopup.open);
 
-const deletePopup = new PopupWithForm(".popup_type_delete", () => {
-  deletePopup.close();
-});
+const deletePopup = new PopupWithDeleteConfirm(
+  ".popup_type_delete",
+  handleConfirmDelete
+);
 deletePopup.setEventListeners();
 
 const profilePicPopup = new PopupWithForm(
@@ -153,21 +155,37 @@ function handleNewCardSubmit(data) {
   addPopup.renderSaving(true);
   api
     .addCard({ title: data.name, link: data.link })
-    .then((res) => {
-      renderCard({
-        name: res.name,
-        link: res.link,
-        likes: res.likes,
-        owner: res.owner,
-        _id: res._id,
-        userId,
-      });
-    })
+    // .then((res) => {
+    //   renderCard({
+    //     name: res.name,
+    //     link: res.link,
+    //     likes: res.likes,
+    //     owner: res.owner,
+    //     _id: res._id,
+    //     userId,
+    //   });
+    // })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       addPopup.renderSaving(false, "add");
       addPopup.close();
+    });
+}
+
+function handleConfirmDelete(card) {
+  deletePopup.renderSaving(true);
+  api
+    .deleteCard(card.getCardId())
+    .then(() => {
+      card.handleDelete();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      deletePopup.renderSaving(false, "delete");
+      deletePopup.close();
     });
 }
