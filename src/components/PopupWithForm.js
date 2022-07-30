@@ -21,11 +21,13 @@ class PopupWithForm extends Popup {
     super.close();
   }
 
-  renderSaving(isSaving) {
+  renderSaving(isSaving, formType) {
     if (isSaving) {
       this._submitButton.textContent = "Saving...";
-    } else {
+    } else if (formType === "edit") {
       this._submitButton.textContent = "Save";
+    } else if (formType === "add") {
+      this._submitButton.textContent = "Create";
     }
   }
 

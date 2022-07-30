@@ -24,11 +24,22 @@ import UserInfo from "../components/UserInfo.js";
 import { api } from "../components/Api";
 
 const renderCard = (card) => {
-  const newCard = new Card(card, cardTemplateSelector, () => {
-    imagePopup.open(card);
-  });
+  const newCard = new Card(
+    card,
+    cardTemplateSelector,
+    handleCardClick,
+    handleTrashButtonClick
+  );
   cardList.addItem(newCard.getView());
 };
+
+function handleCardClick(card) {
+  imagePopup.open(card);
+}
+
+function handleTrashButtonClick(card) {
+  deletePopup.open(card);
+}
 
 let cardList;
 let userId;
@@ -37,6 +48,7 @@ api
   .initialize()
   .then((res) => {
     const [user, data] = res;
+    console.log(data);
     cardList = new Section(
       {
         items: data,
@@ -117,7 +129,7 @@ function handleProfileSubmit(data) {
       console.log(err);
     })
     .finally(() => {
-      editPopup.renderSaving(false);
+      editPopup.renderSaving(false, "edit");
     });
 }
 
@@ -129,6 +141,7 @@ function handleProfileOpen() {
 }
 
 function handleNewCardSubmit(data) {
+  addPopup.renderSaving(true);
   api
     .addCard({ title: data.name, link: data.link })
     .then((res) => {
@@ -138,6 +151,7 @@ function handleNewCardSubmit(data) {
       console.log(err);
     })
     .finally(() => {
+      addPopup.renderSaving(false, "add");
       addPopup.close();
     });
 }
