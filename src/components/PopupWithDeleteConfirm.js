@@ -6,15 +6,12 @@ class PopupWithDeleteConfirm extends Popup {
     this._form = this._popup.querySelector(".popup__form");
     this._handleSubmit = handleSubmit;
     this._submitButton = this._form.querySelector(".popup__submit-button");
+    this._submitButtonText = this._submitButton.textContent;
   }
 
   open(card) {
     super.open();
     this._card = card;
-  }
-
-  renderSaving(isSaving, formType) {
-    super.renderSaving(isSaving, formType);
   }
 
   setEventListeners() {

@@ -139,7 +139,7 @@ function handleProfileSubmit(data) {
       console.log(err);
     })
     .finally(() => {
-      editPopup.renderSaving(false, "edit");
+      editPopup.renderSaving(false);
     });
 }
 
@@ -163,13 +163,13 @@ function handleNewCardSubmit(data) {
         _id: res._id,
         userId,
       });
+      addPopup.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      addPopup.renderSaving(false, "add");
-      addPopup.close();
+      addPopup.renderSaving(false);
     });
 }
 
@@ -179,13 +179,13 @@ function handleConfirmDelete(card) {
     .deleteCard(card.getCardId())
     .then(() => {
       card.handleDelete();
+      deletePopup.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      deletePopup.renderSaving(false, "delete");
-      deletePopup.close();
+      deletePopup.renderSaving(false);
     });
 }
 
@@ -205,7 +205,7 @@ function handleProfilePicSubmit(data) {
       console.log(err);
     })
     .finally(() => {
-      profilePicPopup.renderSaving(false, "edit");
+      profilePicPopup.renderSaving(false);
     });
 }
 

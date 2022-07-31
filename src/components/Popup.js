@@ -22,22 +22,18 @@ class Popup {
     }
   }
 
-  renderSaving(isSaving, formType) {
+  renderSaving(isSaving, loadingText = "Saving...") {
     if (isSaving) {
-      this._submitButton.textContent = "Saving...";
-    } else if (formType === "edit") {
-      this._submitButton.textContent = "Save";
-    } else if (formType === "add") {
-      this._submitButton.textContent = "Create";
-    } else if (formType === "delete") {
-      this._submitButton.textContent = "Yes";
+      this._submitButton.textContent = loadingText;
+    } else {
+      this._submitButton.textContent = this._submitButtonText;
     }
   }
 
   setEventListeners() {
     this._popupCloseButton = this._popup.querySelector(".popup__close");
     this._popupCloseButton.addEventListener("click", this.close);
-    document.addEventListener("mousedown", (evt) => {
+    this._popup.addEventListener("mousedown", (evt) => {
       if (evt.target.matches(".popup")) {
         this.close();
       }
