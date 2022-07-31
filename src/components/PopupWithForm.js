@@ -18,12 +18,6 @@ class PopupWithForm extends Popup {
     return inputValues;
   }
 
-  open() {
-    super.open();
-    this._submitButton.setAttribute.disabled = true;
-    this._submitButton.classList.add("popup__submit-button_disabled");
-  }
-
   close() {
     super.close();
     this._form.reset();

@@ -106,7 +106,10 @@ editButton.addEventListener("click", () => {
 
 const addPopup = new PopupWithForm(".popup_type_add", handleNewCardSubmit);
 addPopup.setEventListeners();
-addButton.addEventListener("click", addPopup.open);
+addButton.addEventListener("click", () => {
+  addPopup.open();
+  addFormValidator.checkInputStatus();
+});
 
 const deletePopup = new PopupWithDeleteConfirm(
   ".popup_type_delete",
@@ -121,6 +124,7 @@ const profilePicPopup = new PopupWithForm(
 profilePicPopup.setEventListeners();
 editProfilePicButton.addEventListener("click", () => {
   profilePicPopup.open();
+  profilePicFormValidator.checkInputStatus();
 });
 
 function handleProfileSubmit(data) {
@@ -145,8 +149,10 @@ function handleProfileSubmit(data) {
 
 function handleProfileOpen() {
   const { name, title } = userInfo.getUserInfo();
+  editFormValidator.checkInputStatus();
   popupName.value = name;
   popupTitle.value = title;
+
   editPopup.open();
 }
 

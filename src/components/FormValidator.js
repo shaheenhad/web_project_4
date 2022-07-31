@@ -71,6 +71,15 @@ class FormValidator {
     });
   }
 
+  checkInputStatus() {
+    this._inputEls.forEach((inputEl) => {
+      if (!inputEl.value) {
+        this._disableButton();
+        this._hideInputError(inputEl);
+      }
+    });
+  }
+
   enableValidation() {
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
