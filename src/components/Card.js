@@ -45,6 +45,10 @@ export default class Card {
     this._cardEl = null;
   }
 
+  isLiked() {
+    return this._likes.some((like) => like._id === this._userId);
+  }
+
   getView() {
     this._cardEl = this._getTemplate();
 

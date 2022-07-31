@@ -43,7 +43,7 @@ function handleTrashButtonClick(card) {
 }
 
 let cardList;
-
+let userId;
 api
   .initialize()
   .then((res) => {
@@ -53,7 +53,7 @@ api
       {
         items: data,
         renderer: (item) => {
-          const userId = user._id;
+          userId = user._id;
           renderCard({
             name: item.name,
             link: item.link,
@@ -115,9 +115,7 @@ deletePopup.setEventListeners();
 
 const profilePicPopup = new PopupWithForm(
   ".popup_type_edit-profile-pic",
-  () => {
-    profilePicPopup.close();
-  }
+  handleProfilePicSubmit
 );
 profilePicPopup.setEventListeners();
 editProfilePicButton.addEventListener("click", () => {
@@ -154,17 +152,17 @@ function handleProfileOpen() {
 function handleNewCardSubmit(data) {
   addPopup.renderSaving(true);
   api
-    .addCard({ title: data.name, link: data.link })
-    // .then((res) => {
-    //   renderCard({
-    //     name: res.name,
-    //     link: res.link,
-    //     likes: res.likes,
-    //     owner: res.owner,
-    //     _id: res._id,
-    //     userId,
-    //   });
-    // })
+    .addCard(data)
+    .then((res) => {
+      renderCard({
+        name: res.name,
+        link: res.link,
+        likes: res.likes,
+        owner: res.owner,
+        _id: res._id,
+        userId,
+      });
+    })
     .catch((err) => {
       console.log(err);
     })
@@ -187,5 +185,25 @@ function handleConfirmDelete(card) {
     .finally(() => {
       deletePopup.renderSaving(false, "delete");
       deletePopup.close();
+    });
+}
+
+function handleProfilePicSubmit(data) {
+  profilePicPopup.renderSaving(true);
+  api
+    .updateProfilePic(data)
+    .then((data) => {
+      userInfo.setUserInfo({
+        name: data.name,
+        title: data.about,
+        avatar: data.avatar,
+      });
+      profilePicPopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      profilePicPopup.renderSaving(false, "edit");
     });
 }

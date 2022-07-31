@@ -35,13 +35,13 @@ class Api {
     }).then((res) => this._handleResponse(res));
   }
 
-  addCard({ title, link }) {
+  addCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: title,
-        link,
+        name: name,
+        link: link,
       }),
     }).then((res) => this._handleResponse(res));
   }
@@ -50,6 +50,23 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
+    }).then((res) => this._handleResponse(res));
+  }
+
+  toggleLike(id, isLiked) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+      method: isLiked ? "DELETE" : "PUT",
+      headers: this._headers,
+    }).then((res) => this._handleResponse(res));
+  }
+
+  updateProfilePic({ avatar }) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar,
+      }),
     }).then((res) => this._handleResponse(res));
   }
 }
