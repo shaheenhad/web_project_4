@@ -29,7 +29,8 @@ const renderCard = (card) => {
     card,
     cardTemplateSelector,
     handleCardClick,
-    handleTrashButtonClick
+    handleTrashButtonClick,
+    toggleLike
   );
   cardList.addItem(newCard.getView());
 };
@@ -205,5 +206,16 @@ function handleProfilePicSubmit(data) {
     })
     .finally(() => {
       profilePicPopup.renderSaving(false, "edit");
+    });
+}
+
+function toggleLike(card) {
+  api
+    .toggleLike(card._id, card.isLiked())
+    .then((likes) => {
+      card.updateLikes(likes.likes);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 }

@@ -1,5 +1,11 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick, handleTrashButtonClick) {
+  constructor(
+    data,
+    templateSelector,
+    handleCardClick,
+    handleTrashButtonClick,
+    handleLikeButton
+  ) {
     this._name = data.name;
     this._link = data.link;
     this._handleCardClick = handleCardClick;
@@ -9,6 +15,7 @@ export default class Card {
     this._ownerId = data.owner._id;
     this._userId = data.userId;
     this._id = data._id;
+    this._handleLikeButton = handleLikeButton;
   }
 
   _getTemplate() {
@@ -18,13 +25,27 @@ export default class Card {
       .cloneNode(true);
   }
 
-  _handleLikeButton() {
-    this._likeButton.classList.toggle("card__like_clicked");
+  updateLikes(likes) {
+    this._likes = likes;
+    this._renderLikes();
+  }
+
+  _renderLikes() {
+    this._likesTotal.textContent = this._likes.length;
+    if (this.isLiked()) {
+      this._likeButton.classList.add("card__like_clicked");
+    } else {
+      this._likeButton.classList.remove("card__like_clicked");
+    }
+  }
+
+  isLiked() {
+    return this._likes.some((like) => like._id === this._userId);
   }
 
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
-      this._handleLikeButton();
+      this._handleLikeButton(this);
     });
 
     this._trashButton.addEventListener("click", () => {
@@ -45,10 +66,6 @@ export default class Card {
     this._cardEl = null;
   }
 
-  isLiked() {
-    return this._likes.some((like) => like._id === this._userId);
-  }
-
   getView() {
     this._cardEl = this._getTemplate();
 
@@ -59,8 +76,7 @@ export default class Card {
 
     this._cardEl.querySelector(".card__title").textContent = this._name;
     this._imageEl.style.backgroundImage = `url(${this._link})`;
-    this._likesTotal.textContent = this._likes.length;
-
+    this._renderLikes();
     if (this._ownerId !== this._userId) {
       this._trashButton.remove();
     }
